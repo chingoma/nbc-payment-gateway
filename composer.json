@@ -81,7 +81,7 @@
     "extra": {
         "laravel": {
             "providers": [
-              "NBCPaymentGatewayServiceProvider"
+              "Lockminds\\NBCPaymentGateway\\NBCPaymentGatewayServiceProvider"
             ],
             "aliases": {
                 "NBCPaymentGateway": "Lockminds\\NBCPaymentGateway\\Facades\\NBCPaymentGateway"
