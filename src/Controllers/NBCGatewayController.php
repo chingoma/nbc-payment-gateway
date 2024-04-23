@@ -1,26 +1,26 @@
 <?php
 
-namespace Lockminds\CrdbPaymentGateway\Controllers;
+namespace Lockminds\NBCPaymentGateway\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
-use Lockminds\CrdbPaymentGateway\Helpers\CrdbHelpers;
-use Lockminds\CrdbPaymentGateway\Models\CrdbApiSetting;
-use Lockminds\CrdbPaymentGateway\Models\CrdbRequest;
-use Lockminds\CrdbPaymentGateway\DTOs\RefundTransactionDTO;
+use Lockminds\NBCPaymentGateway\Helpers\NBCHelpers;
+use Lockminds\NBCPaymentGateway\Models\NBCApiSetting;
+use Lockminds\NBCPaymentGateway\Models\NBCRequest;
+use Lockminds\NBCPaymentGateway\DTOs\RefundTransactionDTO;
 use Mtownsend\XmlToArray\XmlToArray;
 use Spatie\ArrayToXml\ArrayToXml;
 use Throwable;
 
-class CrdbGatewayController extends Controller
+class NBCGatewayController extends Controller
 {
-    private CrdbApiSetting $apiSetting;
+    private NBCApiSetting $apiSetting;
 
     public function __construct()
     {
-        $status = CrdbApiSetting::first();
+        $status = NBCApiSetting::first();
         $this->apiSetting = $status;
     }
 
@@ -28,9 +28,9 @@ class CrdbGatewayController extends Controller
     {
         try {
 
-            $crdbRequest = CrdbRequest::where('reference_id', $request->ReferenceID)->first();
+            $nbcRequest = NBCRequest::where('reference_id', $request->ReferenceID)->first();
 
-            if (empty($crdbRequest)) {
+            if (empty($nbcRequest)) {
                 return response()->json([
                     'ResponseCode' => 'BILLER-18-0000-E',
                     'ResponseStatus' => false,
@@ -38,19 +38,19 @@ class CrdbGatewayController extends Controller
                     'ReferenceID' => $request->ReferenceID]);
             }
 
-            $crdbRequest->callback_date = now("Africa/Dar_es_Salaam");
-            $crdbRequest->callback_status = $request->Status;
-            $crdbRequest->callback_description = $request->Description;
-            $crdbRequest->transaction_id = $request->MFSTransactionID;
-            $crdbRequest->callback_amount = $request->Amount;
+            $nbcRequest->callback_date = now("Africa/Dar_es_Salaam");
+            $nbcRequest->callback_status = $request->Status;
+            $nbcRequest->callback_description = $request->Description;
+            $nbcRequest->transaction_id = $request->MFSTransactionID;
+            $nbcRequest->callback_amount = $request->Amount;
 
             if ($request->Status) {
-                $crdbRequest->status = 'success';
+                $nbcRequest->status = 'success';
             } else {
-                $crdbRequest->status = 'failed';
+                $nbcRequest->status = 'failed';
             }
 
-            $crdbRequest->save();
+            $nbcRequest->save();
 
             return response()->json(['ResponseCode' => 'BILLER-18-0000-S',
                 'ResponseStatus' => true,
@@ -164,7 +164,7 @@ XML;
     public function transactions(Request $request): JsonResponse
     {
         try {
-            $transactions = CrdbRequest::latest()->paginate();
+            $transactions = NBCRequest::latest()->paginate();
 
             return response()->json($transactions);
         } catch (Throwable $throwable) {
@@ -197,7 +197,7 @@ XML;
             $body = (object) json_decode($response->body());
 
             if (empty($body->error_description)) {
-                $newSettings = CrdbApiSetting::find($this->apiSetting->id);
+                $newSettings = NBCApiSetting::find($this->apiSetting->id);
                 $newSettings->access_token = $body->access_token;
                 $newSettings->save();
                 $this->apiSetting = $newSettings;
@@ -222,23 +222,23 @@ XML;
         }
 
         try {
-            $systemDate = CrdbHelpers::systemDateTime();
-            $crdbRequest = new CrdbRequest();
-            $crdbRequest->date = $systemDate['timely'];
-            $crdbRequest->amount = floatval($requestData->amount);
-            $crdbRequest->customer_id = $requestData->id;
-            $crdbRequest->customer_msisdn = $requestData->customer_msisdn;
-            $crdbRequest->access_name = $this->apiSetting->access_name;
-            $crdbRequest->biller_msisdn = $this->apiSetting->msisdn;
-            $crdbRequest->remarks = $requestData->remark;
-            $crdbRequest->save();
+            $systemDate = NBCHelpers::systemDateTime();
+            $nbcRequest = new NBCRequest();
+            $nbcRequest->date = $systemDate['timely'];
+            $nbcRequest->amount = floatval($requestData->amount);
+            $nbcRequest->customer_id = $requestData->id;
+            $nbcRequest->customer_msisdn = $requestData->customer_msisdn;
+            $nbcRequest->access_name = $this->apiSetting->access_name;
+            $nbcRequest->biller_msisdn = $this->apiSetting->msisdn;
+            $nbcRequest->remarks = $requestData->remark;
+            $nbcRequest->save();
 
             $payload = json_encode([
                 'CustomerMSISDN' => $requestData->customer_msisdn,
                 'BillerMSISDN' => $this->apiSetting->msisdn,
                 'Amount' => $requestData->amount,
                 'Remarks' => $requestData->remarks,
-                'ReferenceID' => $this->apiSetting->biller_code.$crdbRequest->id,
+                'ReferenceID' => $this->apiSetting->biller_code.$nbcRequest->id,
             ]);
             $response = Http::withHeaders([
                 'Content-Type' => 'application/json',
@@ -258,13 +258,13 @@ XML;
             }
 
             if ($body->ResponseStatus) {
-                $crdbRequest->transaction_date = now("Africa/Dar_es_Salaam")->toDateTimeString();
-                $crdbRequest->status = 'submitted';
-                $crdbRequest->response_status = $body->ResponseStatus;
-                $crdbRequest->response_code = $body->ResponseCode;
-                $crdbRequest->response_description = $body->ResponseDescription;
-                $crdbRequest->reference_id = $body->ReferenceID ?? '';
-                $crdbRequest->save();
+                $nbcRequest->transaction_date = now("Africa/Dar_es_Salaam")->toDateTimeString();
+                $nbcRequest->status = 'submitted';
+                $nbcRequest->response_status = $body->ResponseStatus;
+                $nbcRequest->response_code = $body->ResponseCode;
+                $nbcRequest->response_description = $body->ResponseDescription;
+                $nbcRequest->reference_id = $body->ReferenceID ?? '';
+                $nbcRequest->save();
 
                 return response()->json($body);
             } else {
@@ -287,17 +287,17 @@ XML;
         }
 
         try {
-            $systemDate = CrdbHelpers::systemDateTime();
-            $crdbRequest = new CrdbRequest();
-            $crdbRequest->date = $systemDate['timely'];
-            $crdbRequest->type = 'receipt';
-            $crdbRequest->amount = floatval($requestData->amount);
-            $crdbRequest->customer_id = $requestData->id;
-            $crdbRequest->customer_msisdn = $requestData->customer_msisdn;
-            $crdbRequest->access_name = $this->apiSetting->access_name;
-            $crdbRequest->biller_msisdn = $this->apiSetting->msisdn;
-            $crdbRequest->remarks = $requestData->remark;
-            $crdbRequest->save();
+            $systemDate = NBCHelpers::systemDateTime();
+            $nbcRequest = new NBCRequest();
+            $nbcRequest->date = $systemDate['timely'];
+            $nbcRequest->type = 'receipt';
+            $nbcRequest->amount = floatval($requestData->amount);
+            $nbcRequest->customer_id = $requestData->id;
+            $nbcRequest->customer_msisdn = $requestData->customer_msisdn;
+            $nbcRequest->access_name = $this->apiSetting->access_name;
+            $nbcRequest->biller_msisdn = $this->apiSetting->msisdn;
+            $nbcRequest->remarks = $requestData->remark;
+            $nbcRequest->save();
 
             $payloadRaw = [
                 'TYPE' => $this->apiSetting->account_to_wallet_type,
@@ -328,22 +328,22 @@ XML;
             $body = (object) XmlToArray::convert($response->body());
 
             if (! empty($body->TXNID)) {
-//                $crdbRequest->transaction_date = now(env('TIMEZONE'))->toDateTimeString();
-//                $crdbRequest->status = 'submitted';
-//                $crdbRequest->response_status = $body->ResponseStatus;
-//                $crdbRequest->response_code = $body->ResponseCode;
-//                $crdbRequest->response_description = $body->ResponseDescription;
-//                $crdbRequest->reference_id = $body->ReferenceID ?? '';
-//                $crdbRequest->save();
+//                $nbcRequest->transaction_date = now(env('TIMEZONE'))->toDateTimeString();
+//                $nbcRequest->status = 'submitted';
+//                $nbcRequest->response_status = $body->ResponseStatus;
+//                $nbcRequest->response_code = $body->ResponseCode;
+//                $nbcRequest->response_description = $body->ResponseDescription;
+//                $nbcRequest->reference_id = $body->ReferenceID ?? '';
+//                $nbcRequest->save();
 
                 return response()->json($body);
             } else {
-                $crdbRequest->status = 'submitted';
-                $crdbRequest->response_status = 'failed';
-                $crdbRequest->response_code = $body->TXNSTATUS;
-                $crdbRequest->response_description = $body->MESSAGE;
-                $crdbRequest->reference_id = '';
-                $crdbRequest->save();
+                $nbcRequest->status = 'submitted';
+                $nbcRequest->response_status = 'failed';
+                $nbcRequest->response_code = $body->TXNSTATUS;
+                $nbcRequest->response_description = $body->MESSAGE;
+                $nbcRequest->reference_id = '';
+                $nbcRequest->save();
 
                 return response()->json($body);
             }
@@ -365,17 +365,17 @@ XML;
         }
 
         try {
-            $systemDate = CrdbHelpers::systemDateTime();
-            $crdbRequest = new CrdbRequest();
-            $crdbRequest->date = $systemDate['timely'];
-            $crdbRequest->type = 'receipt';
-            $crdbRequest->amount = floatval($requestData->amount);
-            $crdbRequest->customer_id = $requestData->id;
-            $crdbRequest->customer_msisdn = $requestData->customer_msisdn;
-            $crdbRequest->access_name = $this->apiSetting->access_name;
-            $crdbRequest->biller_msisdn = $this->apiSetting->msisdn;
-            $crdbRequest->remarks = $requestData->remark;
-            $crdbRequest->save();
+            $systemDate = NBCHelpers::systemDateTime();
+            $nbcRequest = new NBCRequest();
+            $nbcRequest->date = $systemDate['timely'];
+            $nbcRequest->type = 'receipt';
+            $nbcRequest->amount = floatval($requestData->amount);
+            $nbcRequest->customer_id = $requestData->id;
+            $nbcRequest->customer_msisdn = $requestData->customer_msisdn;
+            $nbcRequest->access_name = $this->apiSetting->access_name;
+            $nbcRequest->biller_msisdn = $this->apiSetting->msisdn;
+            $nbcRequest->remarks = $requestData->remark;
+            $nbcRequest->save();
 
             $payloadRaw = [
                 'TYPE' => $this->apiSetting->wallet_to_account_type,
@@ -403,22 +403,22 @@ XML;
             $body = (object) XmlToArray::convert($response->body());
 
             if (! empty($body->TXNID)) {
-//                $crdbRequest->transaction_date = now(env('TIMEZONE'))->toDateTimeString();
-//                $crdbRequest->status = 'submitted';
-//                $crdbRequest->response_status = $body->ResponseStatus;
-//                $crdbRequest->response_code = $body->ResponseCode;
-//                $crdbRequest->response_description = $body->ResponseDescription;
-//                $crdbRequest->reference_id = $body->ReferenceID ?? '';
-//                $crdbRequest->save();
+//                $nbcRequest->transaction_date = now(env('TIMEZONE'))->toDateTimeString();
+//                $nbcRequest->status = 'submitted';
+//                $nbcRequest->response_status = $body->ResponseStatus;
+//                $nbcRequest->response_code = $body->ResponseCode;
+//                $nbcRequest->response_description = $body->ResponseDescription;
+//                $nbcRequest->reference_id = $body->ReferenceID ?? '';
+//                $nbcRequest->save();
 
                 return response()->json($body);
             } else {
-                $crdbRequest->status = 'submitted';
-                $crdbRequest->response_status = 'failed';
-                $crdbRequest->response_code = $body->TXNSTATUS;
-                $crdbRequest->response_description = $body->MESSAGE;
-                $crdbRequest->reference_id = '';
-                $crdbRequest->save();
+                $nbcRequest->status = 'submitted';
+                $nbcRequest->response_status = 'failed';
+                $nbcRequest->response_code = $body->TXNSTATUS;
+                $nbcRequest->response_description = $body->MESSAGE;
+                $nbcRequest->reference_id = '';
+                $nbcRequest->save();
 
                 return response()->json($body);
             }
@@ -434,17 +434,17 @@ XML;
         $requestData = RefundTransactionDTO::fromRequest($request);
         $endpoint = $this->apiSetting->base_url.'API/Reverse/ReverseTransaction';
         try {
-            $systemDate = CrdbHelpers::systemDateTime();
-            $crdbRequest = new CrdbRequest();
-            $crdbRequest->date = $systemDate['timely'];
-            $crdbRequest->amount = floatval($requestData->amount);
-            $crdbRequest->customer_id = $requestData->id;
-            $crdbRequest->customer_msisdn = $requestData->customer_msisdn;
-            $crdbRequest->access_name = $this->apiSetting->access_name;
-            $crdbRequest->biller_msisdn = $this->apiSetting->msisdn;
-            $crdbRequest->remarks = $requestData->remark;
-            $crdbRequest->type = 'refund';
-            $crdbRequest->save();
+            $systemDate = NBCHelpers::systemDateTime();
+            $nbcRequest = new NBCRequest();
+            $nbcRequest->date = $systemDate['timely'];
+            $nbcRequest->amount = floatval($requestData->amount);
+            $nbcRequest->customer_id = $requestData->id;
+            $nbcRequest->customer_msisdn = $requestData->customer_msisdn;
+            $nbcRequest->access_name = $this->apiSetting->access_name;
+            $nbcRequest->biller_msisdn = $this->apiSetting->msisdn;
+            $nbcRequest->remarks = $requestData->remark;
+            $nbcRequest->type = 'refund';
+            $nbcRequest->save();
 
             $payload = json_encode([
                 'CustomerMSISDN' => $requestData->customer_msisdn,
@@ -453,7 +453,7 @@ XML;
                 'Amount' => $requestData->amount,
                 'MFSTransactionID' => $requestData->transaction_id,
                 'PurchaseReferenceID' => $requestData->reference_id,
-                'ReferenceID' => $this->apiSetting->biller_code.$crdbRequest->id,
+                'ReferenceID' => $this->apiSetting->biller_code.$nbcRequest->id,
             ]);
 
             $response = Http::withHeaders([
@@ -474,13 +474,13 @@ XML;
             }
 
             if ($body->ResponseStatus) {
-                $crdbRequest->transaction_date = now("Africa/Dar_es_Salaam")->toDateTimeString();
-                $crdbRequest->status = 'submitted';
-                $crdbRequest->response_status = $body->ResponseStatus;
-                $crdbRequest->response_code = $body->ResponseCode;
-                $crdbRequest->response_description = $body->ResponseDescription;
-                $crdbRequest->reference_id = $body->ReferenceID ?? '';
-                $crdbRequest->save();
+                $nbcRequest->transaction_date = now("Africa/Dar_es_Salaam")->toDateTimeString();
+                $nbcRequest->status = 'submitted';
+                $nbcRequest->response_status = $body->ResponseStatus;
+                $nbcRequest->response_code = $body->ResponseCode;
+                $nbcRequest->response_description = $body->ResponseDescription;
+                $nbcRequest->reference_id = $body->ReferenceID ?? '';
+                $nbcRequest->save();
 
                 return response()->json($body);
             } else {

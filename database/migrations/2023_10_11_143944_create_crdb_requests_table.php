@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('crdb_requests', function (Blueprint $table) {
+        Schema::create('nbc_requests', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->timestamp('date');
             $table->timestamp('transaction_date')->nullable();
@@ -32,7 +32,7 @@ return new class extends Migration
             $table->string('response_code')->nullable();
             $table->string('response_description')->nullable();
             $table->string('reference_id')->nullable();
-            $table->string('crdb_reference_id')->nullable();
+            $table->string('nbc_reference_id')->nullable();
             $table->string('status')->default('pending')->nullable();
             $table->string('type')->default('payment')->nullable();
             $table->timestamps();
@@ -47,6 +47,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('crdb_requests');
+        Schema::dropIfExists('nbc_requests');
     }
 };

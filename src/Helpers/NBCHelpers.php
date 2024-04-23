@@ -1,10 +1,10 @@
 <?php
 
-namespace Lockminds\CrdbPaymentGateway\Helpers;
+namespace Lockminds\NBCPaymentGateway\Helpers;
 
 use Illuminate\Support\Carbon;
 
-class CrdbHelpers
+class NBCHelpers
 {
 
     public static function systemDateTime($dateInput = null): array

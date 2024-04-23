@@ -1,6 +1,6 @@
 <?php
 
-namespace Lockminds\CrdbPaymentGateway\Rules;
+namespace Lockminds\NBCPaymentGateway\Rules;
 
 use Closure;
 use Illuminate\Contracts\Validation\DataAwareRule;
@@ -56,7 +56,7 @@ class ReferenceAvailableValidation implements DataAwareRule, ValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        $data = DB::table('crdb_requests')->where('reference_id', $value)->first();
+        $data = DB::table('nbc_requests')->where('reference_id', $value)->first();
         if (empty($data->id)) {
             $fail(__('ReferenceID supplied is not in our record'));
         }

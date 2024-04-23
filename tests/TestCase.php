@@ -1,10 +1,10 @@
 <?php
 
-namespace Lockminds\CrdbPaymentGateway\Tests;
+namespace Lockminds\NBCPaymentGateway\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Lockminds\CrdbPaymentGateway\CrdbPaymentGatewayServiceProvider;
+use Lockminds\NBCPaymentGateway\NBCPaymentGatewayServiceProvider;
 
 class TestCase extends Orchestra
 {
@@ -13,14 +13,14 @@ class TestCase extends Orchestra
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'Lockminds\\CrdbPaymentGateway\\Database\\Factories\\'.class_basename($modelName).'Factory'
+            fn (string $modelName) => 'Lockminds\\NBCPaymentGateway\\Database\\Factories\\'.class_basename($modelName).'Factory'
         );
     }
 
     protected function getPackageProviders($app)
     {
         return [
-            CrdbPaymentGatewayServiceProvider::class,
+            NBCPaymentGatewayServiceProvider::class,
         ];
     }
 
@@ -29,7 +29,7 @@ class TestCase extends Orchestra
         config()->set('database.default', 'testing');
 
         /*
-        $migration = include __DIR__.'/../database/migrations/create_crdb-payment-gateway_table.php.stub';
+        $migration = include __DIR__.'/../database/migrations/create_nbc-payment-gateway_table.php.stub';
         $migration->up();
         */
     }

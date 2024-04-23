@@ -1,13 +1,13 @@
 {
     "version": "1.3.0",
-    "name": "chingoma/crdb-payment-gateway",
-    "description": "This is my package crdb-payment-gateway",
+    "name": "chingoma/nbc-payment-gateway",
+    "description": "This is my package nbc-payment-gateway",
     "keywords": [
         "Lockminds",
         "laravel",
-        "crdb-payment-gateway"
+        "nbc-payment-gateway"
     ],
-    "homepage": "https://github.com/chingoma/crdb-payment-gateway",
+    "homepage": "https://github.com/chingoma/nbc-payment-gateway",
     "license": "MIT",
     "authors": [
         {
@@ -42,19 +42,19 @@
     },
     "autoload": {
         "psr-4": {
-            "Lockminds\\CrdbPaymentGateway\\": "src/",
-            "Lockminds\\CrdbPaymentGateway\\Database\\Factories\\": "database/factories/"
+            "Lockminds\\NBCPaymentGateway\\": "src/",
+            "Lockminds\\NBCPaymentGateway\\Database\\Factories\\": "database/factories/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Lockminds\\CrdbPaymentGateway\\Tests\\": "tests/",
+            "Lockminds\\NBCPaymentGateway\\Tests\\": "tests/",
             "Workbench\\App\\": "workbench/app/"
         }
     },
     "scripts": {
         "post-autoload-dump": "@composer run prepare",
-        "clear": "@php vendor/bin/testbench package:purge-crdb-payment-gateway --ansi",
+        "clear": "@php vendor/bin/testbench package:purge-nbc-payment-gateway --ansi",
         "prepare": "@php vendor/bin/testbench package:discover --ansi",
         "build": [
             "@composer run prepare",
@@ -80,10 +80,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Lockminds\\CrdbPaymentGateway\\CrdbPaymentGatewayServiceProvider"
+              "NBCPaymentGatewayServiceProvider"
             ],
             "aliases": {
-                "CrdbPaymentGateway": "Lockminds\\CrdbPaymentGateway\\Facades\\CrdbPaymentGateway"
+                "NBCPaymentGateway": "Lockminds\\NBCPaymentGateway\\Facades\\NBCPaymentGateway"
             }
         }
     },

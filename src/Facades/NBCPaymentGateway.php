@@ -5,12 +5,12 @@ namespace Lockminds\NBCPaymentGateway\Facades;
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @see \Lockminds\NBCPaymentGateway\Skeleton
+ * @see \Lockminds\NBCPaymentGateway\NBCPaymentGateway
  */
-class Skeleton extends Facade
+class NBCPaymentGateway extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return \Lockminds\NBCPaymentGateway\Skeleton::class;
+        return \Lockminds\NBCPaymentGateway\NBCPaymentGateway::class;
     }
 }

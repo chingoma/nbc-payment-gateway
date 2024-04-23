@@ -2,6 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get("/crdb", function(){
+Route::get("/nbc", function(){
     echo "<h1>Crdb Gateway</h1>";
 });

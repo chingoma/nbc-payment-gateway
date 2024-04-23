@@ -1,12 +1,12 @@
 <?php
 
-namespace Modules\Crdb\DTOs;
+namespace Lockminds\NBCPaymentGateway\DTOs;
 
-use Lockminds\CrdbPaymentGateway\Rules\CrdbValidationHelper;
+use Lockminds\NBCPaymentGateway\Rules\NBCValidationHelper;
 use WendellAdriel\ValidatedDTO\Casting\StringCast;
 use WendellAdriel\ValidatedDTO\ValidatedDTO;
 
-class CrdbReceiptDTO extends ValidatedDTO
+class NBCReceiptDTO extends ValidatedDTO
 {
     public string $id;
 
@@ -24,7 +24,7 @@ class CrdbReceiptDTO extends ValidatedDTO
      */
     protected function rules(): array
     {
-        return CrdbValidationHelper::accountToWalletRequestValidator();
+        return NBCValidationHelper::accountToWalletRequestValidator();
     }
 
     /**

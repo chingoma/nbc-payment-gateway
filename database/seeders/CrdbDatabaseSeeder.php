@@ -1,6 +1,6 @@
 <?php
 
-namespace Lockminds\CrdbPaymentGateway\Database;
+namespace Lockminds\NBCPaymentGateway\Database;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;

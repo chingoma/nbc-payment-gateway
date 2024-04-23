@@ -1,6 +1,6 @@
 <?php
 
-namespace Lockminds\CrdbPaymentGateway\Traits;
+namespace Lockminds\NBCPaymentGateway\Traits;
 
 use Illuminate\Database\Eloquent\Model;
 use Ramsey\Uuid\Uuid;

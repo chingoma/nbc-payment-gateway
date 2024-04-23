@@ -1,6 +1,6 @@
 <?php
 
-namespace Lockminds\CrdbPaymentGateway\Controllers;
+namespace Lockminds\NBCPaymentGateway\Controllers;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;

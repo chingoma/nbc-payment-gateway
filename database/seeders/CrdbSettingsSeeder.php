@@ -1,22 +1,22 @@
 <?php
-namespace Lockminds\CrdbPaymentGateway\Database;
+namespace Lockminds\NBCPaymentGateway\Database;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Lockminds\CrdbPaymentGateway\Models\CrdbApiSetting;
+use Lockminds\NBCPaymentGateway\Models\NBCApiSetting;
 
 class CrdbSettingsSeeder extends Seeder
 {
     public function run(): void
     {
-        DB::table("crdb_api_settings")->truncate();
-        $settings = new CrdbApiSetting();
-        $settings->access_name = 'crdbtest';
+        DB::table("nbc_api_settings")->truncate();
+        $settings = new NBCApiSetting();
+        $settings->access_name = 'nbctest';
 
         $settings->account_name = 'Informats Technologies LTD';
         $settings->msisdn = '25565877788';
         $settings->biller_code = 'IND';
-        $settings->base_url = 'https://sal-accessgwtest.crdb.co.tz:8443/';
+        $settings->base_url = 'https://sal-accessgwtest.nbc.co.tz:8443/';
         $settings->username = 'InformatsTechnologiesLTD';
 
         $settings->password = 'tYEVuMl';

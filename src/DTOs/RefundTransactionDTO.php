@@ -1,8 +1,8 @@
 <?php
 
-namespace Lockminds\CrdbPaymentGateway\DTOs;
+namespace Lockminds\NBCPaymentGateway\DTOs;
 
-use Lockminds\CrdbPaymentGateway\Rules\CrdbValidationHelper;
+use Lockminds\NBCPaymentGateway\Rules\NBCValidationHelper;
 use WendellAdriel\ValidatedDTO\Casting\StringCast;
 use WendellAdriel\ValidatedDTO\ValidatedDTO;
 
@@ -28,7 +28,7 @@ class RefundTransactionDTO extends ValidatedDTO
      */
     protected function rules(): array
     {
-        return CrdbValidationHelper::refundTransactionValidator();
+        return NBCValidationHelper::refundTransactionValidator();
     }
 
     /**

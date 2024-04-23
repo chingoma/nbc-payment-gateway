@@ -1,6 +1,6 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace Lockminds\NBCPaymentGateway\Commands;
 
 use Illuminate\Console\Command;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Lockminds\CrdbPaymentGateway\Models;
+namespace Lockminds\NBCPaymentGateway\Models;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 

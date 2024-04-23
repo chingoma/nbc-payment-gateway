@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('crdb_api_settings', function (Blueprint $table) {
+        Schema::create('nbc_api_settings', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('access_name', 11)->nullable();
             $table->string('account_name')->unique();
@@ -42,6 +42,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('crdb_api_settings');
+        Schema::dropIfExists('nbc_api_settings');
     }
 };

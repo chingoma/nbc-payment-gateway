@@ -1,6 +1,6 @@
 <?php
 
-namespace Lockminds\CrdbPaymentGateway\Database\Factories;
+namespace Lockminds\NBCPaymentGateway\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 

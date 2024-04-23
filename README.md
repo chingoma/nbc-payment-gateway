@@ -1,9 +1,9 @@
-# This is my package crdb-payment-gateway
+# This is my package nbc-payment-gateway
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/canwork/crdb-payment-gateway.svg?style=flat-square)](https://packagist.org/packages/canwork/crdb-payment-gateway)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/canwork/crdb-payment-gateway/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/canwork/crdb-payment-gateway/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/canwork/crdb-payment-gateway/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/canwork/crdb-payment-gateway/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/canwork/crdb-payment-gateway.svg?style=flat-square)](https://packagist.org/packages/canwork/crdb-payment-gateway)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/canwork/nbc-payment-gateway.svg?style=flat-square)](https://packagist.org/packages/canwork/nbc-payment-gateway)
+[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/canwork/nbc-payment-gateway/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/canwork/nbc-payment-gateway/actions?query=workflow%3Arun-tests+branch%3Amain)
+[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/canwork/nbc-payment-gateway/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/canwork/nbc-payment-gateway/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
+[![Total Downloads](https://img.shields.io/packagist/dt/canwork/nbc-payment-gateway.svg?style=flat-square)](https://packagist.org/packages/canwork/nbc-payment-gateway)
 
 This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
 
@@ -20,20 +20,20 @@ We highly appreciate you sending us a postcard from your hometown, mentioning wh
 You can install the package via composer:
 
 ```bash
-composer require canwork/crdb-payment-gateway
+composer require canwork/nbc-payment-gateway
 ```
 
 You can publish and run the migrations with:
 
 ```bash
-php artisan vendor:publish --tag="crdb-payment-gateway-migrations"
+php artisan vendor:publish --tag="nbc-payment-gateway-migrations"
 php artisan migrate
 ```
 
 You can publish the config file with:
 
 ```bash
-php artisan vendor:publish --tag="crdb-payment-gateway-config"
+php artisan vendor:publish --tag="nbc-payment-gateway-config"
 ```
 
 This is the contents of the published config file:
@@ -46,14 +46,14 @@ return [
 Optionally, you can publish the views using
 
 ```bash
-php artisan vendor:publish --tag="crdb-payment-gateway-views"
+php artisan vendor:publish --tag="nbc-payment-gateway-views"
 ```
 
 ## Usage
 
 ```php
-$crdbPaymentGateway = new Lockminds\CrdbPaymentGateway();
-echo $crdbPaymentGateway->echoPhrase('Hello, Lockminds!');
+$nbcPaymentGateway = new Lockminds\NBCPaymentGateway();
+echo $nbcPaymentGateway->echoPhrase('Hello, Lockminds!');
 ```
 
 ## Testing

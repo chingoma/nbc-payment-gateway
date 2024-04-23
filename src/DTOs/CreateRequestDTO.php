@@ -1,8 +1,8 @@
 <?php
 
-namespace Lockminds\CrdbPaymentGateway\DTOs;
+namespace Lockminds\NBCPaymentGateway\DTOs;
 
-use Lockminds\CrdbPaymentGateway\Rules\CrdbValidationHelper;
+use Lockminds\NBCPaymentGateway\Rules\NBCValidationHelper;
 use WendellAdriel\ValidatedDTO\Casting\StringCast;
 use WendellAdriel\ValidatedDTO\ValidatedDTO;
 
@@ -26,7 +26,7 @@ class CreateRequestDTO extends ValidatedDTO
      */
     protected function rules(): array
     {
-        return CrdbValidationHelper::createRequestValidator();
+        return NBCValidationHelper::createRequestValidator();
     }
 
     /**

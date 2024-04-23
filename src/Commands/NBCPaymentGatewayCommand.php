@@ -1,12 +1,12 @@
 <?php
 
-namespace Lockminds\CrdbPaymentGateway\Commands;
+namespace Lockminds\NBCPaymentGateway\Commands;
 
 use Illuminate\Console\Command;
 
-class CrdbPaymentGatewayCommand extends Command
+class NBCPaymentGatewayCommand extends Command
 {
-    public $signature = 'crdb-payment-gateway';
+    public $signature = 'nbc-payment-gateway';
 
     public $description = 'My command';
 

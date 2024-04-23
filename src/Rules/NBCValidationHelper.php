@@ -1,11 +1,11 @@
 <?php
 
-namespace Lockminds\CrdbPaymentGateway\Rules;
+namespace Lockminds\NBCPaymentGateway\Rules;
 
 
-use Lockminds\CrdbPaymentGateway\Rules\TransactionAvailableValidation;
+use Lockminds\NBCPaymentGateway\Rules\TransactionAvailableValidation;
 
-class CrdbValidationHelper
+class NBCValidationHelper
 {
     public static function accountToWalletRequestValidator(): array
     {

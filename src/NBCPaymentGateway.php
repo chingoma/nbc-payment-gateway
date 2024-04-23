@@ -2,6 +2,6 @@
 
 namespace Lockminds\NBCPaymentGateway;
 
-class Skeleton
+class NBCPaymentGateway
 {
 }
