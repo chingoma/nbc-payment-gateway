@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
-        'name' => 'chingoma/crdb-payment-gateway',
+        'name' => 'chingoma/nbc-payment-gateway',
         'pretty_version' => '1.3.0',
         'version' => '1.3.0.0',
-        'reference' => null,
+        'reference' => NULL,
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -46,10 +46,10 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
-        'chingoma/crdb-payment-gateway' => array(
+        'chingoma/nbc-payment-gateway' => array(
             'pretty_version' => '1.3.0',
             'version' => '1.3.0.0',
-            'reference' => null,
+            'reference' => NULL,
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -486,6 +486,15 @@
             'install_path' => __DIR__ . '/../laravel/tinker',
             'aliases' => array(),
             'dev_requirement' => true,
+        ),
+        'lcobucci/jwt' => array(
+            'pretty_version' => '5.3.0',
+            'version' => '5.3.0.0',
+            'reference' => '08071d8d2c7f4b00222cc4b1fb6aa46990a80f83',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../lcobucci/jwt',
+            'aliases' => array(),
+            'dev_requirement' => false,
         ),
         'league/commonmark' => array(
             'pretty_version' => '2.4.2',

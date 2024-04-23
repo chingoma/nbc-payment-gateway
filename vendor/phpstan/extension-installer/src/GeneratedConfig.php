@@ -10,65 +10,65 @@ final class GeneratedConfig
 {
 
 	public const EXTENSIONS = array (
-  'larastan/larastan' =>
+  'larastan/larastan' => 
   array (
-    'install_path' => '/Volumes/Projects/PACKAGES/crdb-payment-gateway/vendor/larastan/larastan',
+    'install_path' => 'D:\\PROJECTS\\INTEGRATIONS\\LOCKMINDS\\nbc-payment-gateway\\vendor/larastan/larastan',
     'relative_install_path' => '../../../larastan/larastan',
-    'extra' =>
+    'extra' => 
     array (
-      'includes' =>
+      'includes' => 
       array (
         0 => 'extension.neon',
       ),
     ),
     'version' => 'v2.9.2',
   ),
-  'nesbot/carbon' =>
+  'nesbot/carbon' => 
   array (
-    'install_path' => '/Volumes/Projects/PACKAGES/crdb-payment-gateway/vendor/nesbot/carbon',
+    'install_path' => 'D:\\PROJECTS\\INTEGRATIONS\\LOCKMINDS\\nbc-payment-gateway\\vendor/nesbot/carbon',
     'relative_install_path' => '../../../nesbot/carbon',
-    'extra' =>
+    'extra' => 
     array (
-      'includes' =>
+      'includes' => 
       array (
         0 => 'extension.neon',
       ),
     ),
     'version' => '2.72.3',
   ),
-  'pestphp/pest' =>
+  'pestphp/pest' => 
   array (
-    'install_path' => '/Volumes/Projects/PACKAGES/crdb-payment-gateway/vendor/pestphp/pest',
+    'install_path' => 'D:\\PROJECTS\\INTEGRATIONS\\LOCKMINDS\\nbc-payment-gateway\\vendor/pestphp/pest',
     'relative_install_path' => '../../../pestphp/pest',
-    'extra' =>
+    'extra' => 
     array (
-      'includes' =>
+      'includes' => 
       array (
         0 => 'extension.neon',
       ),
     ),
     'version' => 'v2.34.1',
   ),
-  'phpstan/phpstan-deprecation-rules' =>
+  'phpstan/phpstan-deprecation-rules' => 
   array (
-    'install_path' => '/Volumes/Projects/PACKAGES/crdb-payment-gateway/vendor/phpstan/phpstan-deprecation-rules',
+    'install_path' => 'D:\\PROJECTS\\INTEGRATIONS\\LOCKMINDS\\nbc-payment-gateway\\vendor/phpstan/phpstan-deprecation-rules',
     'relative_install_path' => '../../phpstan-deprecation-rules',
-    'extra' =>
+    'extra' => 
     array (
-      'includes' =>
+      'includes' => 
       array (
         0 => 'rules.neon',
       ),
     ),
     'version' => '1.1.4',
   ),
-  'phpstan/phpstan-phpunit' =>
+  'phpstan/phpstan-phpunit' => 
   array (
-    'install_path' => '/Volumes/Projects/PACKAGES/crdb-payment-gateway/vendor/phpstan/phpstan-phpunit',
+    'install_path' => 'D:\\PROJECTS\\INTEGRATIONS\\LOCKMINDS\\nbc-payment-gateway\\vendor/phpstan/phpstan-phpunit',
     'relative_install_path' => '../../phpstan-phpunit',
-    'extra' =>
+    'extra' => 
     array (
-      'includes' =>
+      'includes' => 
       array (
         0 => 'extension.neon',
         1 => 'rules.neon',
